@@ -1,4 +1,4 @@
-# Chat Application
+# Chat Application [Live Demo](https://chat-application-m55y.vercel.app/)
 
 A chat application built using React, Firebase (Firestore database), CSS, and EmailJS (for OTP verification).
 
