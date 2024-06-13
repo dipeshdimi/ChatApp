@@ -110,7 +110,6 @@ const Register = () => {
     async function sendOTP(receiverName, receiverEmailId) {
 
         const otp = Math.floor(Math.random() * (999999-100001)) + 100001;
-        console.log(otp);
         
         const params = {
             // receiverName: document.getElementById('receiverName').value,
