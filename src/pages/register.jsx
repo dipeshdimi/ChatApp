@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import logo from '../pics/logo.png';
+import avatar from '../pics/avatar.png';
 
 import { myAuth, /*googleAuth,*/ myStorage, myDB } from "../firebase";     // From the firebase.js file
 
@@ -42,6 +43,8 @@ const Register = () => {
         const email = regEmailEvent.target[1].value;
         const password = regEmailEvent.target[2].value;
         const avatar = regEmailEvent.target[3].files[0];
+
+        // const verified = ;
         
         if(sendOTP(username,email))
         {
@@ -154,13 +157,14 @@ const Register = () => {
                         required type="password"
                         placeholder='password'
                         // onChange = {(passwordChangeEvent) => setPassword(passwordChangeEvent.target.value)}
+                        id="pass"
                     />
                     <input id="DP"
                         required type='file'
                         // onChange = {(avatarChangeEvent) => setAvatar(avatarChangeEvent.target.value)}
                     />
                     <label htmlFor='DP'>
-                        <img src='https://w7.pngwing.com/pngs/1018/958/png-transparent-user-interface-add-avatar-human-ui-user-interface-icon.png' alt=""/>
+                        <img src={avatar} alt=""/>
                         <span>Add an Avatar</span>
                     </label>
 
