@@ -19,7 +19,7 @@ const Login = () => {
     const navigate = useNavigate();
     
     // console.log(myAuth?.currentUser.email);
-    console.log(myAuth?.currentUser);
+    // console.log(myAuth?.currentUser);
     
     const loginEmail = async (loginEmailEvent) => {
         loginEmailEvent.preventDefault();   // ##### 
@@ -59,11 +59,13 @@ const Login = () => {
 
                 <form onSubmit={loginEmail}>
                     <input
+                        id="loginMail"
                         required type="email"
                         placeholder='email'
                         // onChange = {(emailChangeEvent) => setEmail(emailChangeEvent.target.value)}
                     />
                     <input
+                        id="loginPass"
                         required type="password"
                         placeholder='password'
                         // onChange = {(passwordChangeEvent) => setPassword(passwordChangeEvent.target.value)}
