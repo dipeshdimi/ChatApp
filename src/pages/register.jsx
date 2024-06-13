@@ -42,10 +42,8 @@ const Register = () => {
         const email = regEmailEvent.target[1].value;
         const password = regEmailEvent.target[2].value;
         const avatar = regEmailEvent.target[3].files[0];
-
-        const verified = await sendOTP(username,email);
         
-        if(verified)
+        if(sendOTP(username,email))
         {
             try{
                 const res = await createUserWithEmailAndPassword(myAuth, email, password);
