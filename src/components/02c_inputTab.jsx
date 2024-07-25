@@ -9,31 +9,22 @@ import { myDB, myStorage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-// function sleep(ms) {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
-
 const InputTab = () => {
     const [text, setText] = useState("");
     const [img, setImg] = useState(null);
 
     const { curUser } = useContext(AuthContext);
-    // console.log(curUser);
     const { data } = useContext(ChatContext);
 
     useEffect(()=>{
         if(text==="")
         {
             document.getElementById('sendImage').style.display = 'none';
-            // document.getElementById('sendDisabled').style.display = 'inline';
             document.getElementById('voice').style.display = 'inline';
         }
         else
         {
             document.getElementById('sendImage').style.display = 'inline';
-            // document.getElementById('textBox').placeholder = 'Image Selected';
-            // document.getElementById('textBox').style.fontWeight = "800";
-            // document.getElementById('sendDisabled').style.display = 'none';
             document.getElementById('voice').style.display = 'none';
         }
         if(img!==null)
@@ -41,13 +32,19 @@ const InputTab = () => {
             document.getElementById('sendImage').style.display = 'inline';
             document.getElementById('textBox').placeholder = '*Image Selected*';
             document.getElementById('textBox').style.fontWeight = "700";
-            // document.getElementById('sendDisabled').style.display = 'none';
             document.getElementById('voice').style.display = 'none';
         }
         else
             document.getElementById('textBox').placeholder = 'Type something...';
             
     });
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevents adding newline to textarea
+            handleSend();
+        }
+    };
 
     const handleSend = async () => {
         if (img) {
@@ -197,15 +194,15 @@ const InputTab = () => {
         <div id='inputComponent'>
             <div className="input">
                 <input
-                    id = "textBox"
+                    id="textBox"
                     type="text"
                     placeholder="Type something..."
                     onChange={(e) => {
                         setText(e.target.value);
                         document.getElementById('sendImage').style.display = 'inline';
-                        // document.getElementById('sendDisabled').style.display = 'none';
                         document.getElementById('voice').style.display = 'none';
                     }}
+                    onKeyDown={handleKeyDown}
                     value={text}
                 />
             </div>
@@ -218,7 +215,6 @@ const InputTab = () => {
                 onChange={(e) => {
                     setImg(e.target.files[0])
                     document.getElementById('sendImage').style.display = 'inline';
-                    // document.getElementById('sendDisabled').style.display = 'none';
                     document.getElementById('voice').style.display = 'none';
                 }}
             />
@@ -230,7 +226,6 @@ const InputTab = () => {
             <img id='voice' src={voice} alt="" onMouseDown={handleRecord} onMouseUp={handleStop}/>
 
             <img id='sendImage' src={send} alt="" onMouseUp={handleSend}/>
-            {/* <img id='sendDisabled' src={send} alt=""/> */}
         </div>
     </div>
     );

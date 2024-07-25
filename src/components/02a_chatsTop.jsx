@@ -1,29 +1,18 @@
 import { ChatContext } from "../context/ChatContext";
 import { useContext } from "react";
-// import {
-//     collection,
-//     query,
-//     where,
-//     getDocs
-// } from "firebase/firestore";
-// import { myDB } from "../firebase";
-// import { async } from '@firebase/util';
 
-
-const ChatsTop = () => {
-
+const ChatsTop = ({ onBack }) => {
     const { data } = useContext(ChatContext);
 
     return (
         <div className="chat">
             <div className="chatInfo">
                 <span>
-                    <img src={data.user?.photoURL}  alt=""/>
+                    <i className="fa fa-arrow-left" style={{ fontSize: "200%", color: "rgb(220,220,220)", display: 'none' }} onClick={onBack}></i>
+                    <img src={data.user?.photoURL} alt="Profile Pic" />
                     <span>{data.user?.username}</span>
                 </span>
             </div>
-      {/* <Messages />
-      <Input/> */}
         </div>
     );
 }
