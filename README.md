@@ -2,8 +2,12 @@
 
 A chat application built using React, Firebase (Firestore database), CSS, and EmailJS (for OTP verification).
 
-<img src="https://github.com/dipeshdimi/ChatApplication/assets/82582216/cf09b2eb-d69a-4843-9b54-1cd8ea2447f0)" width=49%> <img src="https://github.com/dipeshdimi/ChatApplication/assets/82582216/359c0c38-011e-4fb0-af73-2ccfc4426de7" width=49%>
+### Desktop :-
+<img src="https://github.com/dipeshdimi/ChatApplication/assets/82582216/cf09b2eb-d69a-4843-9b54-1cd8ea2447f0" width=49%> <img src="https://github.com/dipeshdimi/ChatApplication/assets/82582216/359c0c38-011e-4fb0-af73-2ccfc4426de7" width=49%>
 <img src="https://github.com/dipeshdimi/ChatApplication/assets/82582216/5ceb661c-0a89-4d3a-a592-e6af477723f8"> 
+
+### Mobile :-
+<img src="https://github.com/user-attachments/assets/cc23e9c1-c248-4d04-9233-43d9b7adbc22" width=49%> <img src="https://github.com/user-attachments/assets/3816712c-812e-4c1e-b90f-99f04e7e3c6e" width=49%>
 
 
 ## Table of Contents
