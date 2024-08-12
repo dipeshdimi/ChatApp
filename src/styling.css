@@ -112,7 +112,7 @@
 
 /* ChatPage */
 #chatPage {
-  height: 100vh;
+  height: 100dvh;
   background-color: #ddddf7;
   display: flex;
   /* background-image:  url('https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png'); */
