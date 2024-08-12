@@ -1,7 +1,4 @@
-import { useContext, useState, useEffect } from "react";
-import clip from "../pics/clip.png";
-import voice from "../pics/voice.jpg";
-import send from "../pics/send.png";
+import { useContext, useState, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
@@ -12,32 +9,16 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const InputTab = () => {
     const [text, setText] = useState("");
     const [img, setImg] = useState(null);
+    const [placeholder, setPlaceholder] = useState("Type Something...");
 
     const { curUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
 
-    useEffect(()=>{
-        if(text==="")
-        {
-            document.getElementById('sendImage').style.display = 'none';
-            document.getElementById('voice').style.display = 'inline';
-        }
-        else
-        {
-            document.getElementById('sendImage').style.display = 'inline';
-            document.getElementById('voice').style.display = 'none';
-        }
-        if(img!==null)
-        {
-            document.getElementById('sendImage').style.display = 'inline';
-            document.getElementById('textBox').placeholder = '*Image Selected*';
-            document.getElementById('textBox').style.fontWeight = "700";
-            document.getElementById('voice').style.display = 'none';
-        }
-        else
-            document.getElementById('textBox').placeholder = 'Type something...';
-            
-    });
+    const fileInputRef = useRef(null);
+
+    const handleIconClick = () => {
+        fileInputRef.current.click();
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -49,57 +30,58 @@ const InputTab = () => {
     const handleSend = async () => {
         if (img) {
             const storageRef = ref(myStorage, uuid());
-            
+
             const uploadTask = uploadBytesResumable(storageRef, img);
-            
+
             // uploadTask.on(
-                //     (error) => {
-                    //         // Handle Error
-                    //     },
-                    //     async () => {
-                        // await sleep(500);
-                        // const reader = new FileReader;
-                        // reader.onloadend = () => {
-            
-                    if(img.type.includes("image"))
-                    {
-                        uploadTask.then( async()=> {
-                            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                                await updateDoc(doc(myDB, "conversationMessages", data.chatId), {
-                                    messages: arrayUnion({
-                                        id: uuid(),
-                                        text,
-                                        senderId: curUser.uid,
-                                        date: Timestamp.now(),
-                                        img: downloadURL,
-                                        msgType: 'image'
-                                    }),
-                                });
-                            });
+            //     (error) => {
+            //         // Handle Error
+            //     },
+            //     async () => {
+            // await sleep(500);
+            // const reader = new FileReader;
+            // reader.onloadend = () => {
+
+            if (img.type.includes("image")) {
+                uploadTask.then(async () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                        await updateDoc(doc(myDB, "conversationMessages", data.chatId), {
+                            messages: arrayUnion({
+                                id: uuid(),
+                                text,
+                                senderId: curUser.uid,
+                                date: Timestamp.now(),
+                                img: downloadURL,
+                                msgType: 'image'
+                            }),
                         });
-                    }
-                    else if(img.type.includes("video"))
-                    {
-                        uploadTask.then( async()=> {
-                            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                                await updateDoc(doc(myDB, "conversationMessages", data.chatId), {
-                                    messages: arrayUnion({
-                                        id: uuid(),
-                                        text,
-                                        senderId: curUser.uid,
-                                        date: Timestamp.now(),
-                                        videoMsg: downloadURL,
-                                        msgType: 'video'
-                                    }),
-                                });
-                            });
+                    });
+                });
+            }
+            else if (img.type.includes("video")) {
+                uploadTask.then(async () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                        await updateDoc(doc(myDB, "conversationMessages", data.chatId), {
+                            messages: arrayUnion({
+                                id: uuid(),
+                                text,
+                                senderId: curUser.uid,
+                                date: Timestamp.now(),
+                                videoMsg: downloadURL,
+                                msgType: 'video'
+                            }),
                         });
-                    }
-                // }
-                // }
+                    });
+                });
+            }
+            // }
+            // }
             // );
         }
         else {
+            if(text==="")
+                return;
+            
             await updateDoc(doc(myDB, "conversationMessages", data.chatId), {
                 messages: arrayUnion({
                     id: uuid(),
@@ -127,9 +109,10 @@ const InputTab = () => {
 
         setText("");
         setImg(null);
+        setPlaceholder("Type Something...")
     };
 
-    
+
     let device = navigator.mediaDevices.getUserMedia({ audio: true });
     let chunks = [];
     let recorder;
@@ -141,7 +124,7 @@ const InputTab = () => {
 
             if (recorder.state === 'inactive') {
                 let blob = new Blob(chunks, { type: 'audio/webm' });
-                
+
                 var reader = new FileReader();
 
                 reader.addEventListener("load", function () {
@@ -165,7 +148,7 @@ const InputTab = () => {
                     },
                     [data.chatId + ".date"]: serverTimestamp(),
                 });
-        
+
                 updateDoc(doc(myDB, "conversation", data.user.uid), {
                     [data.chatId + ".lastMessage"]: {
                         text
@@ -190,44 +173,29 @@ const InputTab = () => {
 
 
     return (
-    <div id='inputSend'>
-        <div id='inputComponent'>
-            <div className="input">
-                <input
-                    id="textBox"
-                    type="text"
-                    placeholder="Type something..."
-                    onChange={(e) => {
-                        setText(e.target.value);
-                        document.getElementById('sendImage').style.display = 'inline';
-                        document.getElementById('voice').style.display = 'none';
-                    }}
-                    onKeyDown={handleKeyDown}
-                    value={text}
-                />
-            </div>
-        </div>
-        <div className="send">
+        <div className="input-container">
+            <input
+                type="text"
+                className="text-input"
+                placeholder={placeholder}
+                onChange={(e) => { setText(e.target.value); }}
+                onKeyDown={handleKeyDown}
+                value={text}
+            />
+            <i className="material-icons attachment-icon" onClick={handleIconClick}>attachment</i>
             <input
                 type="file"
-                style={{ display: "none" }}
-                id="file"
-                onChange={(e) => {
-                    setImg(e.target.files[0])
-                    document.getElementById('sendImage').style.display = 'inline';
-                    document.getElementById('voice').style.display = 'none';
-                }}
+                className="file-input"
+                ref={fileInputRef}
+                onChange={(e) => { setImg(e.target.files[0]); setPlaceholder("*Image Selected*");}}
+                onKeyDown={handleKeyDown}
             />
-            <label htmlFor="file">
-                <img src={clip} alt="" />
-            </label>
-            
-
-            <img id='voice' src={voice} alt="" onMouseDown={handleRecord} onMouseUp={handleStop}/>
-
-            <img id='sendImage' src={send} alt="" onMouseUp={handleSend}/>
+            {text === "" && img===null ? (
+                <i className="material-icons voice-icon" onMouseDown={handleRecord} onMouseUp={handleStop}>keyboard_voice</i>
+            ) : (
+                <i className="material-icons send-icon" onMouseUp={handleSend}>send</i>
+            )}
         </div>
-    </div>
     );
 };
 
