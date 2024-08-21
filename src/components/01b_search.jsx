@@ -108,7 +108,7 @@ const Search = () => {
     return (
         <div>
             <input 
-                id='search' 
+                className='search' 
                 type='text' 
                 placeholder='Search Here...'
                 onKeyDown={handleKey}

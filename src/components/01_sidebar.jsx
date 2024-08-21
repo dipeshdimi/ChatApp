@@ -4,7 +4,7 @@ import Contacts from './01c_contacts'
 
 const Sidebar = ({ show, onSelectChat }) => {
     return (
-        <div id='sidebar' className={show ? 'show' : ''}>
+        <div className={`sidebar ${show ? 'show' : ''}`}>
             <Nav/>
             <Search/>
             <Contacts onSelectChat={onSelectChat} />

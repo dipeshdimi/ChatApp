@@ -115,8 +115,8 @@ const Register = () => {
         const otp = Math.floor(Math.random() * (999999-100001)) + 100001;
         
         const params = {
-            // receiverName: document.getElementById('receiverName').value,
-            // receiverEmail: document.getElementById('receiverEmailId').value,
+            // receiverName: document.getElementByClassName('receiverName').value,
+            // receiverEmail: document.getElementByClassName('receiverEmailId').value,
             receiverName: receiverName,
             receiverEmail: receiverEmailId,
             sentOtp: otp
@@ -137,29 +137,29 @@ const Register = () => {
         <div className="formPage">
             <div className="formBox">
                 {/* can't use local file inside image tag in jsx */}
-                <img id='logo' src={logo} alt=""/>
-                <span id="regText">Register</span>
+                <img className='logo' src={logo} alt=""/>
+                <span className="regText">Register</span>
 
                 <form onSubmit={regEmail}>
                     <input
                         required type="text" 
                         placeholder='username'
                         // onChange = {(usernameChangeEvent) => setUsername(usernameChangeEvent.target.value)}
-                        id = 'receiverName'
+                        className='receiverName'
                     />
                     <input
                         required type="email"
                         placeholder='email'
                         // onChange = {(emailChangeEvent) => setEmail(emailChangeEvent.target.value)}
-                        id = 'receiverEmail'
+                        className='receiverEmail'
                     />
                     <input
                         required type="password"
                         placeholder='password'
                         // onChange = {(passwordChangeEvent) => setPassword(passwordChangeEvent.target.value)}
-                        id="pass"
+                        className="pass"
                     />
-                    <input id="DP"
+                    <input className="DP"
                         required type='file'
                         // onChange = {(avatarChangeEvent) => setAvatar(avatarChangeEvent.target.value)}
                     />
@@ -183,12 +183,12 @@ const Register = () => {
                 </form>
 
                 {/* <form onSubmit={sendOTP}>
-                    <input type="text" id="receiverName" />
-                    <input type="email" id="receiverEmailId" />
+                    <input type="text" className="receiverName" />
+                    <input type="email" className="receiverEmailId" />
                     
                 </form> */}
 
-                <span id='loginText'>Already a user? <Link to="/login">Login</Link> </span>
+                <span className='loginText'>Already a user? <Link to="/login">Login</Link> </span>
             </div>
         </div>
     );

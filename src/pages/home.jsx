@@ -26,7 +26,7 @@ const Home = () => {
     };
 
     return (
-        <div id="chatPage">
+        <div className="chatPage">
             <Sidebar show={!isChatSelected} onSelectChat={handleChatSelect} />
             <Chats show={isChatSelected} onBack={handleBackClick} />
         </div>

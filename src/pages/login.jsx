@@ -54,18 +54,18 @@ const Login = () => {
         <div className="formPage">
             <div className="formBox">
                 {/* can't use local file inside image tag in jsx */}
-                <img id='logo' src={logo} alt=""/>
-                <span id="regText">Login</span>
+                <img className='logo' src={logo} alt=""/>
+                <span className="regText">Login</span>
 
                 <form onSubmit={loginEmail}>
                     <input
-                        id="loginMail"
+                        className="loginMail"
                         required type="email"
                         placeholder='email'
                         // onChange = {(emailChangeEvent) => setEmail(emailChangeEvent.target.value)}
                     />
                     <input
-                        id="loginPass"
+                        className="loginPass"
                         required type="password"
                         placeholder='password'
                         // onChange = {(passwordChangeEvent) => setPassword(passwordChangeEvent.target.value)}
@@ -83,7 +83,7 @@ const Login = () => {
                     {/* ##### type='button' */}
                 </form>
 
-                <span id='loginText'>Don't have an account? <Link to="/register">Register</Link> </span>
+                <span className='loginText'>Don't have an account? <Link to="/register">Register</Link> </span>
             </div>
         </div>
     );

@@ -58,12 +58,12 @@ const Message = ({ message }) => {
                 {message.text && <p style={{ display: blank }}>{message.text}</p>}
                 {message.img && <img src={message.img} alt="" />}
                 {message.voiceMsg && (
-                    <audio id="audio" controls>
+                    <audio className="audio" controls>
                         <source src={message.voiceMsg} type="audio/webm" />
                     </audio>
                 )}
                 {message.videoMsg && (
-                    <video id="video" controls>
+                    <video className="video" controls>
                         <source src={message.videoMsg} type="video/webm" />
                     </video>
                 )}

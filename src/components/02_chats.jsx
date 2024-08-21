@@ -9,7 +9,7 @@ const Chats = ({ show, onBack }) => {
     const { data } = useContext(ChatContext);
 
     return (
-        <div id='chats' className={show ? 'show' : ''}>
+        <div className={`chats {show ? 'show' : ''}`}>
             {data.chatId !== 'null' ? (
                 <>
                     <ChatsTop onBack={onBack} />

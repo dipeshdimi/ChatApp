@@ -6,7 +6,7 @@
   width: 0.5em;
 }
 
-#contactList::-webkit-scrollbar-thumb {
+.contactList::-webkit-scrollbar-thumb {
   background-color: #515c6b;
   border-radius: 1.2rem;
 }
@@ -37,11 +37,11 @@
     border: 1px solid rgb(16, 108, 65);
     border-radius: 0.5rem;
 
-    #logo {
+    .logo {
       padding-top: 0%;
       width: 4.5rem;
     }
-    #regText {
+    .regText {
       font-size: 1.5rem;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       color: rgb(56, 50, 50);
@@ -80,7 +80,7 @@
       }
     }
 
-    #DP {
+    .DP {
       display: none;
     }
 
@@ -101,7 +101,7 @@
       }
     }
 
-    #loginText {
+    .loginText {
       font-size: 1rem;
       font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
       font-style: italic;
@@ -111,19 +111,18 @@
 }
 
 /* ChatPage */
-#chatPage {
+.chatPage {
   height: 100dvh;
   background-color: #ddddf7;
   display: flex;
-  /* background-image:  url('https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png'); */
 
-  #sidebar {
+  .sidebar {
     border-right: 1px solid black;
     width: 33vw;
     background-color: #527796;
     background-image: linear-gradient(-20deg, #ddddf7 0%, #d5d5d9 100%);
 
-    #nav {
+    .nav {
       padding: 1% 5%;
       display: flex;
       justify-content: space-between;
@@ -151,7 +150,7 @@
         display: flex;
         align-items: center;
 
-        #logoutLink {
+        .logoutLink {
           text-decoration: none;
           color: white;
         }
@@ -165,7 +164,7 @@
       }
       button:hover {
         background-color: rgb(192, 0, 0);
-        #logoutLink {
+        .logoutLink {
           color: rgb(237, 237, 237);
         }
         img {
@@ -174,7 +173,7 @@
       }
     }
 
-    #search {
+    .search {
       width: 80%;
       margin: 3% 5%;
       padding: 2.5% 5%;
@@ -213,17 +212,14 @@
 
           .unread {
             content: "";
-            width: 14px; /* Set the width and height of the corner circle */
+            width: 14px;
             height: 14px;
-            background-color: #209126; /* Set the background color for the corner circle */
-            border-radius: 50%; /* Make it a circle */
-            position: absolute; /* Position it absolutely within the parent */
-            top: 0; /* Position it at the top */
-            right: 0; /* Position it at the right */
-            transform: translate(
-              -10%,
-              10%
-            ); /* Center it on the top-right corner */
+            background-color: #209126;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(-10%,10%);
           }
         }
 
@@ -291,7 +287,7 @@
       }
     }
   }
-  #chats {
+  .chats {
     overflow: hidden;
     font-family: "Bree Serif";
     width: 67vw;
@@ -442,7 +438,7 @@
       display: flex;
       align-items: center;
       padding: 10px;
-      background-color: #e0e0e0;
+      background-color: #ddddf7;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
       border-top: 1px solid rgb(55, 63, 56);
@@ -518,26 +514,26 @@
 }
 
 @media (max-width: 768px) {
-  #sidebar {
+  .sidebar {
     display: none;
   }
 
-  #search {
+  .search {
     padding: 2% !important;
     width: 90% !important;
     margin: 3% !important;
   }
 
-  #chats {
+  .chats {
     display: none !important;
   }
 
-  #sidebar.show {
+  .sidebar.show {
     display: block;
     width: 100% !important;
   }
 
-  #chats.show {
+  .chats.show {
     display: flex !important;
     width: 100% !important;
   }
@@ -546,7 +542,7 @@
     display: inline-block !important;
   }
 
-  #inputSend {
+  .inputSend {
     display: flex;
   }
 }

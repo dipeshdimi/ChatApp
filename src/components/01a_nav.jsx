@@ -10,13 +10,13 @@ const Nav = () => {
     const {curUser} = useContext(AuthContext);
 
     return (
-        <div id='nav'>
+        <div className='nav'>
             <span>
                 <img src={curUser.photoURL} alt=""/>
                 <span>{curUser.username}</span>
             </span>
             <button onClick = {() => signOut(myAuth)}> 
-                <Link id='logoutLink' to="/login">Logout</Link> 
+                <Link className='logoutLink' to="/login">Logout</Link> 
                 <img src={logout} alt=""/>
             </button>
         </div>

@@ -26,8 +26,8 @@ const Contacts = ({ onSelectChat }) => {
     
     const handleSelect = (clickedChatUserInfo) => {
         dispatch({ type: "CHANGE_USER", payload: clickedChatUserInfo });
-        document.getElementById('sidebar').classList.remove('show');
-        document.getElementById('chats').classList.add('show');
+        Array.from(document.getElementsByClassName('sidebar')).forEach(el => el.classList.remove('show'));
+        Array.from(document.getElementsByClassName('chats')).forEach(el => el.classList.add('show'));
         onSelectChat();
     };
 
